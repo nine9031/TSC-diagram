@@ -1,32 +1,41 @@
-export class Inspector {
-    private field: string;
+import { Activity } from "./Activity"
+import { Participant } from "./Participant"
+import { Registration } from "./Registration"
+import { User } from './User';
+import { Certificate } from "./Certificate"
 
-    constructor(field: string) {
-        this.field = field;
+class Instructor extends User{
+
+    constructor(username: string, password: string, name: string, role: string, email: string){
+        super(username, password, name, role, email)
     }
 
-    public createActivity(): void {
-        console.log("Activity created");
+    public createActivity(activityId: number, name: string,
+    organizer: string,
+    maxParticipant: number,
+    activityPeriod: string,
+    registrationPeriod: string,
+    status: string,
+    approvalRequired: boolean,
+    certificateIssued: boolean,
+    instructor: Instructor,
+    schedule: string): void {
+        let activity = Activity.createActivity(activityId,name,organizer,maxParticipant,activityPeriod,registrationPeriod,status,approvalRequired,certificateIssued,instructor,schedule)
     }
 
-    public approveParticipant(participant: any): void {
-        console.log(`Participant approved`);
+    public approveParticipant(activity: Activity, participant: Participant, registrations: Registration[]): void{
+        activity.approveParticipant(participant,registrations)
     }
 
-    public issueCertificate(): void {
-        console.log("Certificate issued");
+    public issueCertificate(activity: Activity, participant: Participant, registrations: Registration[],template:string): Certificate {
+        return  activity.generateCertificate(registrations,this,this.username,template)
     }
 
-    public searchActivity(): any[] {
-        return []; // Returns array of activities
-    }
+    public searchActivity(): Activity[]{
+        let activity = Activity.searchActivity()
+        return activity 
+    } 
 
-    // Getter and setter for field
-    public getField(): string {
-        return this.field;
-    }
-
-    public setField(field: string): void {
-        this.field = field;
-    }
 }
+
+export { Instructor }

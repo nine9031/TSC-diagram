@@ -1,17 +1,19 @@
-import { Participant } from './Participant';
-export class Notification {
-    private notificationId: number
-    private message: string
-    private recipient: Participant
-    private status: string
+import { Participant } from "./Participant"
 
-    constructor(notificationId: number, message: string, recipient: Participant, status: string){
-        this.notificationId = notificationId
-        this.message = message
-        this.recipient = recipient
-        this.status = status
+class Notification {
+    private notification : number
+    private message : string
+    private recipient : Participant
+    private status : string
+
+    constructor(notification:number,message:string,recipient:Participant,status:string){
+        this.notification=notification
+        this.message=message
+        this.recipient=recipient
+        this.status=status
     }
-    public toString(): string{
-        return `Notification [notificationId = ${this.notificationId}, message = ${this.message}, recipient = ${this.recipient}, status = ${this.status}]`
+    public toString():string{
+        return `Notification[notificationId=${this.notification}, message=${this.message}, recipient=${this.recipient}, status=${this.status}]`
     }
 }
+export { Notification}

@@ -1,27 +1,35 @@
-import { Participant } from './Participant';
 import { User } from "./User";
-import {  }
+import { Registration } from './Registration'
+import { Instructor } from "./Instructor";
+import { Certificate } from "./Certificate";
+import { Activity } from "./Activity";
 
-class Participant extends User{
+class Participant extends User {
+
 
     constructor(username: string, password: string, name: string, role: string, email: string){
-
+        super(username, password, name, role, email)
     }
 
-    public searchActivity(): Activitity[]{
-        return []
-    }
+    // public searchActivity(): Activity[]{
+    //     let activity = Activity.searchActivity()
+    //     return activity
+    // }
 
-    public registerForActivity(activitity:Activitity): boolean {
-        this.registration = new Registration(1, this, activitity, "Waiting For Verify...")
+    public registerForActivity(activity: Activity): boolean {
+        let registration = new Registration(1, this, activity, 'รออนุมัติ')
         return true
     }
-    public downloadCertificate(activity: Activity): Certificate {
 
+    // public downloadCertificate(activity: Activity): Certificate{
+    //     let instructor = new Instructor()
+    //     return new Certificate(1, 'content', instructor, 'ลายเซ็นต์', 'กิจกรรม') 
+    // }
+
+    public toString():string{
+        return `Participant[${super.toString()}]`
     }
 
-    public toString(): string {
-        return `Participant(super)`
-    }
 }
-import { Certificate } from "./Certificate";
+
+export { Participant }
